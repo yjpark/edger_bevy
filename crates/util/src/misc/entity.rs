@@ -14,6 +14,6 @@ pub fn spawn_child_bundle<T: Bundle>(
     bundle: T,
 ) -> Entity {
     let child_entity = commands.spawn(bundle).id();
-    commands.entity(entity).push_children(&[child_entity]);
+    commands.entity(entity).add_children(&[child_entity]);
     child_entity
 }

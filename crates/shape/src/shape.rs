@@ -6,7 +6,7 @@ pub trait Shape {
     fn _create(&self, commands: &mut Commands, entity: Entity);
     fn create(&self, commands: &mut Commands, parent: Entity) -> Entity {
         let entity = commands.spawn_empty().id();
-        commands.entity(parent).push_children(&[entity]);
+        commands.entity(parent).add_children(&[entity]);
         self._create(commands, entity);
         entity
     }
