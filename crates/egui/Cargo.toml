@@ -1,7 +1,7 @@
 [package]
 publish = true
 name = "edger_bevy_egui"
-version = "0.5.0"
+version = "0.6.0"
 description = "edger.dev egui helpers"
 
 edition.workspace = true
