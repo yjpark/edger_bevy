@@ -32,19 +32,17 @@ impl AssetLoader for MarkDownAssetLoader {
     type Settings = ();
     type Error = LoadError;
 
-    fn load<'a>(
+    async fn load<'a>(
         &'a self,
         reader: &'a mut dyn Reader,
         _settings: &'a Self::Settings,
         _load_context: &'a mut LoadContext,
-    ) -> BoxedFuture<'a, LoadResult> {
-        Box::pin(async move {
-            let mut bytes = Vec::new();
-            reader.read_to_end(&mut bytes).await?;
-            let text = String::from_utf8(bytes.to_vec())?;
-            let asset = MarkDownAsset::from(text);
-            Ok(asset)
-        })
+    ) -> Result<Self::Asset, Self::Error> {
+        let mut bytes = Vec::new();
+        reader.read_to_end(&mut bytes).await?;
+        let text = String::from_utf8(bytes.to_vec())?;
+        let asset = MarkDownAsset::from(text);
+        Ok(asset)
     }
     fn extensions(&self) -> &[&str] {
         &["md"]
