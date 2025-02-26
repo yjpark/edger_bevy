@@ -12,7 +12,7 @@ where
 {
     let mut app = App::new();
 
-    app.insert_resource(Msaa::Sample4);
+    //app.insert_resource(Msaa::Sample4);
 
     //https://github.com/bevyengine/bevy/issues/10157
     #[cfg(target_arch = "wasm32")]
@@ -66,7 +66,7 @@ where
 }
 
 fn setup_2d_camera(mut commands: Commands) {
-    commands.spawn(Camera2dBundle::default());
+    commands.spawn(Camera2d::default());
 }
 
 fn setup_window_size(

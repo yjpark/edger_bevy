@@ -1,6 +1,5 @@
-use bevy::asset::{Asset, AssetLoader, AsyncReadExt, LoadContext, io::Reader};
+use bevy::asset::{Asset, AssetLoader, LoadContext, io::Reader};
 use bevy::reflect::TypePath;
-use bevy::utils::BoxedFuture;
 
 #[derive(Debug, Asset, TypePath)]
 pub struct MarkDownAsset {
