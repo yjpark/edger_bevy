@@ -40,11 +40,9 @@ pub fn set_color(text_color: &mut TextColor, color: Color) {
     text_color.0 = color;
 }
 
-pub fn set_size_color(text: &mut Text, font_size: f32, color: Color) {
-    for section in text.sections.iter_mut() {
-        section.style.font_size = font_size;
-        section.style.color = color;
-    }
+pub fn set_size_color(text_font: &mut TextFont, text_color: &mut TextColor, font_size: f32, color: Color) {
+    set_size(text_font, font_size);
+    set_color(text_color, color);
 }
 
 pub fn set_value(text: &mut Text2d, v: String) {

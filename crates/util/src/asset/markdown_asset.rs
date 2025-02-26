@@ -34,7 +34,7 @@ impl AssetLoader for MarkDownAssetLoader {
 
     fn load<'a>(
         &'a self,
-        reader: &'a mut Reader,
+        reader: &'a mut dyn Reader,
         _settings: &'a Self::Settings,
         _load_context: &'a mut LoadContext,
     ) -> BoxedFuture<'a, LoadResult> {
