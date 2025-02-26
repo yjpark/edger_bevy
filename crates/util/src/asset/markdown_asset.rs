@@ -32,11 +32,11 @@ impl AssetLoader for MarkDownAssetLoader {
     type Settings = ();
     type Error = LoadError;
 
-    async fn load<'a>(
-        &'a self,
-        reader: &'a mut dyn Reader,
-        _settings: &'a Self::Settings,
-        _load_context: &'a mut LoadContext,
+    async fn load(
+        &self,
+        reader: &mut dyn Reader,
+        _settings: &Self::Settings,
+        _load_context: &mut LoadContext<'_>,
     ) -> Result<Self::Asset, Self::Error> {
         let mut bytes = Vec::new();
         reader.read_to_end(&mut bytes).await?;
