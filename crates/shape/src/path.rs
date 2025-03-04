@@ -123,6 +123,7 @@ impl DoubleShape<shapes::Rectangle, shapes::SvgPathShape> for StrokeRectanglePat
         shapes::Rectangle {
             extents: Vec2::new(self.width, self.height),
             origin: self.origin,
+            ..default()
         }
     }
     fn get_shape2(&self) -> shapes::SvgPathShape {

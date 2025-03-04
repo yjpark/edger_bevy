@@ -1,7 +1,6 @@
-use std::sync::RwLock;
+use std::sync::{Arc, RwLock};
 use lazy_static::lazy_static;
 
-use bevy::prelude::*;
 use bevy_egui::{egui::{FontDefinitions, FontData, FontFamily, FontId, Style, TextStyle}, EguiContexts};
 
 lazy_static! {
@@ -35,7 +34,7 @@ impl EguiFont {
         if let Some(data) = font.data {
             let name = font.name;
             let font_data = FontData::from_owned(data);
-            fonts.font_data.insert(name.clone(), font_data);
+            fonts.font_data.insert(name.clone(), Arc::new(font_data));
             fonts.families
                 .get_mut(&FontFamily::Monospace)
                 .unwrap()

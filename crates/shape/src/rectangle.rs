@@ -23,6 +23,7 @@ impl SingleShape<shapes::Rectangle> for FillRectangle {
         shapes::Rectangle {
             extents: Vec2::new(self.width, self.height),
             origin: self.origin,
+            ..default()
         }
     }
     fn get_fill(&self) -> Option<Fill> {
@@ -56,6 +57,7 @@ impl SingleShape<shapes::Rectangle> for StrokeRectangle {
         shapes::Rectangle {
             extents: Vec2::new(self.width, self.height),
             origin: self.origin,
+            ..default()
         }
     }
     fn get_stroke(&self) -> Option<Stroke> {
@@ -90,6 +92,7 @@ impl SingleShape<shapes::Rectangle> for OutlineRectangle {
         shapes::Rectangle {
             extents: Vec2::new(self.width, self.height),
             origin: self.origin,
+            ..default()
         }
     }
     fn get_fill(&self) -> Option<Fill> {

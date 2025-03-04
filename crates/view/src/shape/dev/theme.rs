@@ -36,8 +36,8 @@ impl Default for LayoutDevTheme {
 
 impl LayoutDevTheme {
     pub fn get_view_color(&self) -> Color {
-        let mut rng = rand::thread_rng();
-        let hue = rng.gen_range(0.0..360.0);
+        let mut rng = rand::rng();
+        let hue = rng.random_range(0.0..360.0);
         Hsla {
             hue,
             saturation: 0.5,
