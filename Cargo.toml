@@ -24,7 +24,11 @@ unic-langid = { version = "0.9.6", features = [ "macros" ] }
 # Bevy
 bevy = { version = "0.16.1", default-features = false }
 bevy_egui = { version = "0.35.0" }
-bevy_prototype_lyon = "0.13.0"
+
+# bevy_prototype_lyon = "0.13.0"
+# https://github.com/Nilirad/bevy_prototype_lyon/issues/284
+bevy_prototype_lyon = { git = "https://github.com/rparrett/bevy_prototype_lyon", branch = "fix-dynamic-examples" }
+
 anyhow = "1.0.98"
 bevy_asset_loader = "0.23.0"
 

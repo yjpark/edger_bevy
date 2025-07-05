@@ -105,7 +105,7 @@ impl EguiFontSizes {
 
     pub fn apply_context(&self, egui_ctx: &mut EguiContexts) {
         let fonts = EguiFont::get_default_definitions();
-        let ctx = egui_ctx.ctx_mut();
+        let ctx = egui_ctx.ctx_mut().unwrap();
         ctx.set_fonts(fonts);
         let mut style: Style = (*ctx.style()).clone();
         self.apply_style(&mut style);
