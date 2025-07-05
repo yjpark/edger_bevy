@@ -51,7 +51,7 @@ where
                         layout
                     );
                 }
-                evts.send(Self::new(entity, view, layout));
+                evts.write(Self::new(entity, view, layout));
             }
         }
     }
@@ -88,8 +88,8 @@ pub trait LayoutEnv {
         TE: LayoutEnv,
         T: View<TE>,
     {
-        for (parent, child, view) in view_query.iter() {
-            if parent.get() == entity {
+        for (child_of, child, view) in view_query.iter() {
+            if child_of.parent() == entity {
                 return Ok(ViewEntity {
                     env: PhantomData,
                     entity: child,
@@ -130,8 +130,8 @@ pub trait LayoutEnv {
         T: View<TE>,
     {
         let mut children = Vec::new();
-        for (parent, child, view) in view_query.iter() {
-            if parent.get() == entity {
+        for (child_of, child, view) in view_query.iter() {
+            if child_of.parent() == entity {
                 children.push(ViewEntity {
                     env: PhantomData,
                     entity: child,

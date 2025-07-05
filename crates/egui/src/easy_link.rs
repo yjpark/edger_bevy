@@ -71,7 +71,7 @@ impl EasyLink {
             };
         if clicked {
             if is_internal {
-                link_evts.send(EasyLinkEvent{
+                link_evts.write(EasyLinkEvent{
                     link: url.clone(),
                     new_tab,
                 });

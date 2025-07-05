@@ -73,7 +73,7 @@ fn setup_window_size(
     window_query: Query<&Window, With<PrimaryWindow>>,
     mut app_state: ResMut<AppState>
 ) {
-    let Ok(window) = window_query.get_single() else {
+    let Ok(window) = window_query.single() else {
         return;
     };
 
@@ -90,7 +90,7 @@ fn on_window_resized(
     mut app_state: ResMut<AppState>,
     mut window_resized_evts: EventWriter<WindowResizedEvent>,
 ) {
-    let Ok((window_entity, window)) = window_query.get_single() else {
+    let Ok((window_entity, window)) = window_query.single() else {
         return;
     };
     for evt in evts.read() {
@@ -106,7 +106,7 @@ fn on_window_resized(
             app_state.window_width = evt.width;
             app_state.window_height = evt.height;
             app_state.scale_factor_override = window.resolution.scale_factor_override();
-            window_resized_evts.send(resized_evt);
+            window_resized_evts.write(resized_evt);
         }
     }
 }
@@ -116,7 +116,7 @@ fn update_window_scale_factor(
     window_query: Query<&Window, With<PrimaryWindow>>,
     mut app_state: ResMut<AppState>,
 ) {
-    if let Ok(window) = window_query.get_single() {
+    if let Ok(window) = window_query.single() {
         let scale_factor = window.scale_factor();
         if scale_factor != app_state.window_scale_factor {
             println!(
