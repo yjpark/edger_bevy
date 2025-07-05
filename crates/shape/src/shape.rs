@@ -1,9 +1,20 @@
 use bevy::prelude::*;
-use bevy_prototype_lyon::entity::ShapeBundle;
-use bevy_prototype_lyon::prelude::*;
+use bevy_prototype_lyon::geometry::LyonPathBuilderExt;
+use bevy_prototype_lyon::prelude::tess::path::builder::NoAttributes;
+use bevy_prototype_lyon::prelude::tess::path::BuilderImpl;
+use bevy_prototype_lyon::prelude::{*, Shape as LyonShape};
+use bevy_prototype_lyon::prelude::tess::path::path::Builder;
 
 pub trait Shape {
+    fn get_transform(&self) -> Transform;
+    fn get_fill(&self) -> Option<Fill> {
+        None
+    }
+    fn get_stroke(&self) -> Option<Stroke> {
+        None
+    }
     fn _create(&self, commands: &mut Commands, entity: Entity);
+
     fn create(&self, commands: &mut Commands, parent: Entity) -> Entity {
         let entity = commands.spawn_empty().id();
         commands.entity(parent).add_children(&[entity]);
@@ -11,35 +22,28 @@ pub trait Shape {
         entity
     }
     fn update(&self, commands: &mut Commands, entity: Entity) {
-        commands.entity(entity).remove::<ShapeBundle>();
+        commands.entity(entity).remove::<LyonShape>();
         self._create(commands, entity);
+    }
+    fn insert(&self, commands: &mut Commands, entity: Entity, builder: ShapeBuilder<NoAttributes<BuilderImpl>>) {
+        let ready_builder =  match (self.get_fill(), self.get_stroke()) {
+            (Some(fill), Some(stroke)) => builder.fill(fill).stroke(stroke),
+            (Some(fill), None) => builder.fill(fill),
+            (None, Some(stroke)) => builder.stroke(stroke),
+            (None, None) => return,
+        };
+        let mut op = commands.entity(entity);
+        op.insert(self.get_transform());
+        op.insert(ready_builder.build());
     }
 }
 
-pub trait SingleShape<T: Geometry>: Shape {
+pub trait SingleShape<T: Geometry<Builder>>: Shape {
     fn get_shape(&self) -> T;
-    fn get_fill(&self) -> Option<Fill> {
-        None
-    }
-    fn get_stroke(&self) -> Option<Stroke> {
-        None
-    }
-    fn get_transform(&self) -> Transform;
     fn _do_create(&self, commands: &mut Commands, entity: Entity) {
         let shape = self.get_shape();
-        let mut op = commands.entity(entity);
-        op
-            .insert(ShapeBundle {
-                path: GeometryBuilder::build_as(&shape),
-                transform: self.get_transform(),
-                ..default()
-            });
-        if let Some(fill) = self.get_fill() {
-            op.insert(fill);
-        }
-        if let Some(stroke) = self.get_stroke() {
-            op.insert(stroke);
-        }
+        let builder = ShapeBuilder::with(&shape);
+        self.insert(commands, entity, builder);
     }
 }
 

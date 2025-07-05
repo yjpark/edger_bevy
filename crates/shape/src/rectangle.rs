@@ -17,15 +17,6 @@ impl Shape for FillRectangle {
     fn _create(&self, commands: &mut Commands, entity: Entity) {
         self._do_create(commands, entity);
     }
-}
-impl SingleShape<shapes::Rectangle> for FillRectangle {
-    fn get_shape(&self) -> shapes::Rectangle {
-        shapes::Rectangle {
-            extents: Vec2::new(self.width, self.height),
-            origin: self.origin,
-            ..default()
-        }
-    }
     fn get_fill(&self) -> Option<Fill> {
         Some(Fill::color(self.color))
     }
@@ -34,6 +25,15 @@ impl SingleShape<shapes::Rectangle> for FillRectangle {
             return offscreen::transform();
         }
         Transform::from_xyz(self.offset.x, self.offset.y, self.offset.z)
+    }
+}
+impl SingleShape<shapes::Rectangle> for FillRectangle {
+    fn get_shape(&self) -> shapes::Rectangle {
+        shapes::Rectangle {
+            extents: Vec2::new(self.width, self.height),
+            origin: self.origin,
+            ..default()
+        }
     }
 }
 
@@ -51,15 +51,6 @@ impl Shape for StrokeRectangle {
     fn _create(&self, commands: &mut Commands, entity: Entity) {
         self._do_create(commands, entity);
     }
-}
-impl SingleShape<shapes::Rectangle> for StrokeRectangle {
-    fn get_shape(&self) -> shapes::Rectangle {
-        shapes::Rectangle {
-            extents: Vec2::new(self.width, self.height),
-            origin: self.origin,
-            ..default()
-        }
-    }
     fn get_stroke(&self) -> Option<Stroke> {
         Some(Stroke::new(self.color, self.line_width))
     }
@@ -68,6 +59,15 @@ impl SingleShape<shapes::Rectangle> for StrokeRectangle {
             return offscreen::transform();
         }
         Transform::from_xyz(self.offset.x, self.offset.y, self.offset.z)
+    }
+}
+impl SingleShape<shapes::Rectangle> for StrokeRectangle {
+    fn get_shape(&self) -> shapes::Rectangle {
+        shapes::Rectangle {
+            extents: Vec2::new(self.width, self.height),
+            origin: self.origin,
+            ..default()
+        }
     }
 }
 
@@ -86,15 +86,6 @@ impl Shape for OutlineRectangle {
     fn _create(&self, commands: &mut Commands, entity: Entity) {
         self._do_create(commands, entity);
     }
-}
-impl SingleShape<shapes::Rectangle> for OutlineRectangle {
-    fn get_shape(&self) -> shapes::Rectangle {
-        shapes::Rectangle {
-            extents: Vec2::new(self.width, self.height),
-            origin: self.origin,
-            ..default()
-        }
-    }
     fn get_fill(&self) -> Option<Fill> {
         Some(Fill::color(self.color))
     }
@@ -110,5 +101,14 @@ impl SingleShape<shapes::Rectangle> for OutlineRectangle {
             return offscreen::transform();
         }
         Transform::from_xyz(self.offset.x, self.offset.y, self.offset.z)
+    }
+}
+impl SingleShape<shapes::Rectangle> for OutlineRectangle {
+    fn get_shape(&self) -> shapes::Rectangle {
+        shapes::Rectangle {
+            extents: Vec2::new(self.width, self.height),
+            origin: self.origin,
+            ..default()
+        }
     }
 }

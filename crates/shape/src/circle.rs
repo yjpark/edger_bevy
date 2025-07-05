@@ -15,14 +15,6 @@ impl Shape for FillCircle {
     fn _create(&self, commands: &mut Commands, entity: Entity) {
         self._do_create(commands, entity);
     }
-}
-impl SingleShape<shapes::Circle> for FillCircle {
-    fn get_shape(&self) -> shapes::Circle {
-        shapes::Circle {
-            center: Vec2::ZERO,
-            radius: self.radius,
-        }
-    }
     fn get_fill(&self) -> Option<Fill>{
         Some(Fill::color(self.color))
     }
@@ -31,6 +23,14 @@ impl SingleShape<shapes::Circle> for FillCircle {
             return offscreen::transform();
         }
         Transform::from_xyz(self.offset.x, self.offset.y, self.offset.z)
+    }
+}
+impl SingleShape<shapes::Circle> for FillCircle {
+    fn get_shape(&self) -> shapes::Circle {
+        shapes::Circle {
+            center: Vec2::ZERO,
+            radius: self.radius,
+        }
     }
 }
 
@@ -46,14 +46,6 @@ impl Shape for StrokeCircle {
     fn _create(&self, commands: &mut Commands, entity: Entity) {
         self._do_create(commands, entity);
     }
-}
-impl SingleShape<shapes::Circle> for StrokeCircle {
-    fn get_shape(&self) -> shapes::Circle {
-        shapes::Circle {
-            center: Vec2::ZERO,
-            radius: self.radius,
-        }
-    }
     fn get_stroke(&self) -> Option<Stroke> {
         Some(Stroke::new(self.color, self.line_width))
     }
@@ -62,6 +54,14 @@ impl SingleShape<shapes::Circle> for StrokeCircle {
             return offscreen::transform();
         }
         Transform::from_xyz(self.offset.x, self.offset.y, self.offset.z)
+    }
+}
+impl SingleShape<shapes::Circle> for StrokeCircle {
+    fn get_shape(&self) -> shapes::Circle {
+        shapes::Circle {
+            center: Vec2::ZERO,
+            radius: self.radius,
+        }
     }
 }
 
@@ -78,14 +78,6 @@ impl Shape for OutlineCircle {
     fn _create(&self, commands: &mut Commands, entity: Entity) {
         self._do_create(commands, entity);
     }
-}
-impl SingleShape<shapes::Circle> for OutlineCircle {
-    fn get_shape(&self) -> shapes::Circle {
-        shapes::Circle {
-            center: Vec2::ZERO,
-            radius: self.radius,
-        }
-    }
     fn get_fill(&self) -> Option<Fill> {
         Some(Fill::color(self.color))
     }
@@ -101,5 +93,13 @@ impl SingleShape<shapes::Circle> for OutlineCircle {
             return offscreen::transform();
         }
         Transform::from_xyz(self.offset.x, self.offset.y, self.offset.z)
+    }
+}
+impl SingleShape<shapes::Circle> for OutlineCircle {
+    fn get_shape(&self) -> shapes::Circle {
+        shapes::Circle {
+            center: Vec2::ZERO,
+            radius: self.radius,
+        }
     }
 }
