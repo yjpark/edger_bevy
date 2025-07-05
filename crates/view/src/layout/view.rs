@@ -66,8 +66,8 @@ pub type LayoutChangedQuery<'w, 's, 'v, 'd, T> =
     Query<'w, 's, (Entity, &'v T, &'d LayoutData), Changed<LayoutData>>;
 pub type LayoutChangedWithChildrenQuery<'w, 's, 'v, 'd, 'c, T> =
     Query<'w, 's, (Entity, &'v T, &'d LayoutData, &'c Children), Changed<LayoutData>>;
-pub type ViewQuery<'w, 's, 'p, 'v, T> = Query<'w, 's, (&'p Parent, Entity, &'v T)>;
-pub type ViewAddedQuery<'w, 's, 'p, 'v, T> = Query<'w, 's, (&'p Parent, Entity, &'v T), Added<T>>;
+pub type ViewQuery<'w, 's, 'c, 'v, T> = Query<'w, 's, (&'c ChildOf, Entity, &'v T)>;
+pub type ViewAddedQuery<'w, 's, 'c, 'v, T> = Query<'w, 's, (&'c ChildOf, Entity, &'v T), Added<T>>;
 pub type RootViewQuery<'w, 's, 'v, T> = Query<'w, 's, (Entity, &'v T)>;
 pub type RootViewAddedQuery<'w, 's, 'v, T> = Query<'w, 's, (Entity, &'v T), Added<T>>;
 
