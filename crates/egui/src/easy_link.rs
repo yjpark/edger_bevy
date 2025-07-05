@@ -76,11 +76,9 @@ impl EasyLink {
                     new_tab,
                 });
             } else {
-                ui.ctx().output_mut(|o| {
-                    o.open_url = Some(egui::output::OpenUrl {
-                        url: url.clone(),
-                        new_tab,
-                    });
+                ui.ctx().open_url(egui::output::OpenUrl {
+                    url: url.clone(),
+                    new_tab,
                 });
             }
         }
