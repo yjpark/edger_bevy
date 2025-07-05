@@ -1,5 +1,4 @@
 use bevy::prelude::*;
-use bevy_prototype_lyon::geometry::LyonPathBuilderExt;
 use bevy_prototype_lyon::prelude::*;
 use bevy_prototype_lyon::prelude::tess::path::path::Builder;
 

@@ -39,7 +39,7 @@ where
                         layout
                     );
                 }
-                evts.send(Self::new(entity, view, layout));
+                evts.write(Self::new(entity, view, layout));
             }
         }
     }

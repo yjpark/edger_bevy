@@ -56,7 +56,7 @@ pub fn insert_preload_assets<A: PreloadAssets>(app: &mut App, assets: A) {
 
 pub fn add_assets_loaded_systems<M>(
     app: &mut App,
-    systems: impl IntoSystemConfigs<M>,
+    systems: impl IntoScheduleConfigs<bevy::ecs::system::ScheduleSystem, M>,
 ) {
     app.add_systems(OnEnter(AssetsStates::Loaded), systems);
 }

@@ -53,7 +53,7 @@ impl ColorBackground {
     ) {
         for (layout, _, children) in query.iter() {
             for child in children.iter() {
-                if let Ok((background_entity, mut background)) = background_query.get_mut(*child) {
+                if let Ok((background_entity, mut background)) = background_query.get_mut(child) {
                     background.layout = *layout;
                     background.update(&mut commands, &(), background_entity);
                 }
