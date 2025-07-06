@@ -68,6 +68,7 @@ default = [
     "bevy/bevy_sprite",
     "bevy/bevy_asset",
     "bevy/bevy_text",
+    "bevy/bevy_picking",
     "bevy/png",
 ]
 

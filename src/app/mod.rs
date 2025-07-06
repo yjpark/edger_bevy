@@ -112,7 +112,6 @@ fn on_window_resized(
 }
 
 fn update_window_scale_factor(
-    //mut _egui_settings: ResMut<EguiSettings>,
     window_query: Query<&Window, With<PrimaryWindow>>,
     mut app_state: ResMut<AppState>,
 ) {
@@ -124,9 +123,6 @@ fn update_window_scale_factor(
                 app_state.window_scale_factor, scale_factor
             );
             app_state.window_scale_factor = scale_factor;
-            /*
-             * egui_settings.scale_factor = 1.0 / scale_factor;
-             */
         }
     }
 }
